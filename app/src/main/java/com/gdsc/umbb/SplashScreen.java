@@ -3,13 +3,13 @@ package com.gdsc.umbb;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class SplashScreen extends AppCompatActivity {
@@ -27,6 +27,8 @@ public class SplashScreen extends AppCompatActivity {
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
+        startActivity(new Intent(SplashScreen.this, HomeActivity.class));
+        finish();
 
         greenLogo = findViewById(R.id.splash_green_logo);
         yellowLogo = findViewById(R.id.splash_yellow_logo);
@@ -70,8 +72,18 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashScreen.this, OnboardingActivity.class));
-                finish();
+                SharedPreferences prefs = getSharedPreferences("GET STARTED", MODE_PRIVATE);
+                boolean start = prefs.getBoolean("start", false);
+                if (!start){
+                    startActivity(new Intent(SplashScreen.this, OnboardingActivity.class));
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    finish();
+                }else {
+                    startActivity(new Intent(SplashScreen.this, HomeActivity.class));
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    finish();
+                }
+
             }
         }, 6000);
     }
@@ -207,18 +219,18 @@ public class SplashScreen extends AppCompatActivity {
         blueView = findViewById(R.id.splash_blue_color);
 
         animation = AnimationUtils.loadAnimation(getApplicationContext(),
-                R.anim.translate_right_top);
+                R.anim.translate_right_to_top);
         greenView.startAnimation(animation);
 
         animation = AnimationUtils.loadAnimation(getApplicationContext(),
-                R.anim.translate_right_bottom);
+                R.anim.translate_right_to_bottom);
         yellowView.startAnimation(animation);
         animation = AnimationUtils.loadAnimation(getApplicationContext(),
-                R.anim.translate_left_top);
+                R.anim.translate_left_to_top);
         redView.startAnimation(animation);
 
         animation = AnimationUtils.loadAnimation(getApplicationContext(),
-                R.anim.translate_left_bottom);
+                R.anim.translate_left_to_bottom);
         blueView.startAnimation(animation);
     }
 }

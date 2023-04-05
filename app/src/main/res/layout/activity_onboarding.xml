@@ -1,77 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray"
-    android:orientation="vertical"
+    android:scrollbars="none"
     tools:context=".OnboardingActivity">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_margin="8dp"
-        android:src="@drawable/charco_education_3" />
-
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@drawable/custom_onboarding_background"
-        android:orientation="vertical" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Why using this app?"
-            android:textSize="36sp"
-            android:fontFamily="@font/google_sans_bold"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:layout_margin="40dp"
-            android:layout_gravity="center"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="My form app will help you save your time"
-            android:textSize="24sp"
-            android:fontFamily="@font/google_sans_regular"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:layout_marginHorizontal="60dp"
-            android:layout_gravity="center"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:layout_marginTop="36dp"
-            android:gravity="center">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:animateLayoutChanges="true"
+            android:layout_margin="8dp">
 
-            <Button
+            <ImageView
+                android:id="@+id/charco_1"
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/charco_1" />
+
+            <ImageView
+                android:id="@+id/charco_2"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/charco_2" />
+
+            <ImageView
+                android:id="@+id/charco_3"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/charco_3" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/custom_onboarding_background"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/onboarding_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/gray2"
-                android:paddingHorizontal="48dp"
-                android:layout_marginEnd="20dp"
-                android:text="Skip"
-                android:background="@drawable/custom_button_stork"/>
+                android:text="Why using this app?"
+                android:textSize="36sp"
+                android:fontFamily="@font/google_sans_bold"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_margin="40dp"
+                android:layout_gravity="center"/>
 
-            <Button
+            <TextView
+                android:id="@+id/onboarding_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:paddingHorizontal="48dp"
-                android:text="Next"
-                android:background="@drawable/custom_button"/>
+                android:text="My form app will help you save your time"
+                android:textSize="24sp"
+                android:fontFamily="@font/google_sans_regular"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_marginHorizontal="60dp"
+                android:layout_gravity="center"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="26dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="36dp"
+                android:animateLayoutChanges="true"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/skip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/gray2"
+                    android:paddingHorizontal="48dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="Skip"
+                    android:background="@drawable/custom_button_stork"/>
+
+                <Button
+                    android:id="@+id/next"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white_1"
+                    android:paddingHorizontal="48dp"
+                    android:text="Next"
+                    android:background="@drawable/custom_button"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

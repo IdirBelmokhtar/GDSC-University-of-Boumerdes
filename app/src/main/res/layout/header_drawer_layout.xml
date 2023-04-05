@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="152dp"
+    android:background="@drawable/custom_drawer_1"
+    android:gravity="center"
+    android:paddingHorizontal="24dp"
+    android:paddingBottom="24dp"
+    android:paddingTop="48dp"
+    android:orientation="horizontal"
+    android:src="@drawable/gdsc_logo"/>
