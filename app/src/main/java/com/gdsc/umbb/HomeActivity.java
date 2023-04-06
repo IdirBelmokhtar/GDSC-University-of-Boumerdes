@@ -113,18 +113,14 @@ public class HomeActivity extends AppCompatActivity {
                         searchView.setQueryHint("Looking for...");
                         searchView.clearFocus();
                         searchView.setIconified(false);
-                        //note_add.setVisibility(View.GONE);
                         searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
                             @Override
                             public void onFocusChange(View view, boolean hasFocus) {
                                 if (hasFocus) {
                                     // searchView expanded
-                                    //note_add.setVisibility(View.GONE);
                                     right_icon_item.setVisible(false);
                                 } else {
                                     // searchView not expanded
-                                    //note_add.setVisibility(View.VISIBLE);
-                                    //item.setIcon()
                                     right_icon_item.setVisible(true);
                                 }
                             }
@@ -139,17 +135,6 @@ public class HomeActivity extends AppCompatActivity {
                             public boolean onQueryTextChange(String s) {
                                 right_icon_item.setVisible(false);
 
-                                /*searchingNotes = s;
-                                List<Notes> searchList = new ArrayList<>();
-                                for (Notes viewSearch : notes) {
-                                    if (viewSearch.getTitle().toLowerCase().contains(s.toLowerCase())) {
-                                        searchList.add(viewSearch);
-                                    } else if (viewSearch.getDescription().toLowerCase().contains(s.toLowerCase())) {
-                                        searchList.add(viewSearch);
-                                    }
-                                }
-                                recyclerViewNotesAdapter.setSearchList(NoteActivity.this, searchList);
-                                runLayoutAnimation();*/
                                 return true;
                             }
                         });
@@ -163,6 +148,11 @@ public class HomeActivity extends AppCompatActivity {
         });
 
     }
+
+
+    /**************
+     Custom of Drawer
+     **************/
 
     @Override
     public void onPostCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
@@ -263,6 +253,8 @@ public class HomeActivity extends AppCompatActivity {
         //TintUtils.tintList(this, menu, R.color.bar_icon_color);
         return true;
     }
+
+    /**************/
 
     @Override
     public void onBackPressed() {

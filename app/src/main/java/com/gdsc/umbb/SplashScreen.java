@@ -27,9 +27,6 @@ public class SplashScreen extends AppCompatActivity {
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
-        startActivity(new Intent(SplashScreen.this, HomeActivity.class));
-        finish();
-
         greenLogo = findViewById(R.id.splash_green_logo);
         yellowLogo = findViewById(R.id.splash_yellow_logo);
         redLogo = findViewById(R.id.splash_red_logo);
