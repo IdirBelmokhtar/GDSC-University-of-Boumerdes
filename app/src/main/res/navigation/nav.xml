@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.gdsc.umbb.HomeFragment"
+        android:name="com.gdsc.umbb.Fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/informationFragment"
-        android:name="com.gdsc.umbb.InformationFragment"
+        android:name="com.gdsc.umbb.Fragments.InformationFragment"
         android:label="fragment_information"
         tools:layout="@layout/fragment_information" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.gdsc.umbb.SettingsFragment"
+        android:name="com.gdsc.umbb.Fragments.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/aboutUsFragment"
-        android:name="com.gdsc.umbb.AboutUsFragment"
+        android:name="com.gdsc.umbb.Fragments.AboutUsFragment"
         android:label="fragment_about_us"
         tools:layout="@layout/fragment_about_us" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.gdsc.umbb;
+package com.gdsc.umbb.Fragments;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.gdsc.umbb.R;
 
 /**
  * A simple {@link Fragment} subclass.

@@ -18,11 +18,13 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/white_1"
+            android:background="@color/white"
             android:elevation="4dp"
-            android:theme="@style/TitleToolbar"
+            android:theme="@style/ToolbarTitleFont"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:title="GDSC"
+            app:titleMarginStart="24dp"
+            app:logo="@drawable/gdsc_icon"
             app:titleTextColor="@color/black"
             app:menu="@menu/my_menu"/>
 
@@ -46,7 +48,7 @@
         app:itemIconSize="16dp"
         app:itemIconTint="@color/black"
         app:menu="@menu/drawer_menu"
-        app:itemTextAppearance="@style/TitleToolbar">
+        app:itemTextAppearance="@style/DrawerTextFont">
 
         <LinearLayout
             android:id="@+id/logout"

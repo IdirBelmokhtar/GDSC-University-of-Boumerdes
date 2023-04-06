@@ -6,11 +6,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.Context;
 import android.os.Build;
@@ -23,12 +20,12 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.SearchView;
-import android.widget.Toast;
 
+import com.gdsc.umbb.Fragments.AboutUsFragment;
+import com.gdsc.umbb.Fragments.HomeFragment;
+import com.gdsc.umbb.Fragments.InformationFragment;
+import com.gdsc.umbb.Fragments.SettingsFragment;
 import com.google.android.material.navigation.NavigationView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -113,7 +110,7 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.search:
                         // Search.
                         searchView = (SearchView) item.getActionView();
-                        searchView.setQueryHint("Search...");
+                        searchView.setQueryHint("Looking for...");
                         searchView.clearFocus();
                         searchView.setIconified(false);
                         //note_add.setVisibility(View.GONE);
@@ -140,6 +137,8 @@ public class HomeActivity extends AppCompatActivity {
 
                             @Override
                             public boolean onQueryTextChange(String s) {
+                                right_icon_item.setVisible(false);
+
                                 /*searchingNotes = s;
                                 List<Notes> searchList = new ArrayList<>();
                                 for (Notes viewSearch : notes) {

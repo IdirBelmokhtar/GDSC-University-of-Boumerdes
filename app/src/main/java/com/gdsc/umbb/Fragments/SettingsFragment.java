@@ -1,4 +1,4 @@
-package com.gdsc.umbb;
+package com.gdsc.umbb.Fragments;
 
 import android.os.Bundle;
 
@@ -11,6 +11,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import com.gdsc.umbb.R;
 
 public class SettingsFragment extends Fragment {
 
