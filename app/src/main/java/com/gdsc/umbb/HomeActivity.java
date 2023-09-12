@@ -1,5 +1,7 @@
 package com.gdsc.umbb;
 
+import static com.gdsc.umbb.Fragments.HomeFragment.recyclerView;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -27,6 +29,9 @@ import com.gdsc.umbb.Fragments.InformationFragment;
 import com.gdsc.umbb.Fragments.SettingsFragment;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class HomeActivity extends AppCompatActivity {
 
     private DrawerLayout drawer;
@@ -44,10 +49,10 @@ public class HomeActivity extends AppCompatActivity {
         this.drawerNav = (NavigationView) findViewById(R.id.drawer_nav_view);
         this.drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
+//--------------------------------
         drawerNav.setCheckedItem(R.id.drawer_nav_home);
 
-        // Set the back arrow in the action bar
+        // Set the action bar
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -63,7 +68,7 @@ public class HomeActivity extends AppCompatActivity {
         drawer.addDrawerListener(toggle);
 
         toggle.syncState();
-
+//-------------------------------------------------
         getSupportFragmentManager().beginTransaction().replace(R.id.drawer_fragment_container, new HomeFragment()).commit();
 
         // Toolbar items.
@@ -134,7 +139,24 @@ public class HomeActivity extends AppCompatActivity {
                             @Override
                             public boolean onQueryTextChange(String s) {
                                 right_icon_item.setVisible(false);
+                                ArrayList<String> searchList = new ArrayList<>();
+                                searchList.add("Faire un Recours");
+                                searchList.add("Demande de bloquer");
+                                searchList.add("Demande de changement de Specialite");
+                                searchList.add("Demande de changement d'université");
+                                searchList.add("Demande de changement de groupe");
+                                searchList.add("Demande Salle et materiel");
 
+                                ArrayList<String> newList = new ArrayList<>();
+                                newList.clear();
+                                for (String viewSearch : searchList) {
+                                    if (viewSearch.toLowerCase().contains(s.toLowerCase())) {
+                                        newList.add(viewSearch);
+                                    }
+                                }
+                                myadapter adapter = new myadapter(newList, HomeActivity.this);
+
+                                recyclerView.setAdapter(adapter);
                                 return true;
                             }
                         });

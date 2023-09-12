@@ -2,6 +2,10 @@
     <string name="app_name">GDSC University of Boumerdes</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="About_us">About us </string>
+    <string name="part_one">This Google developer Student Club is an enthusiastic community group based in University of MHamed bouguerra Faculty of Sciences in Boumerdes, Algeria.</string>
+    <string name="part_two">We aim to bridge the gap between theoretical and practical knowledge for developers students. It provides students with the resources, opportunities, and experience necessary to be industry ready, all while still pursuing their degrees.</string>
+    <string name="part_three">This mobile application was made thanks to our passionate club members, we thank all participants. </string>
+    <string name="Follow_us">Follow us </string>
 </resources>

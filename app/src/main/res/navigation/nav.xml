@@ -25,4 +25,9 @@
         android:name="com.gdsc.umbb.Fragments.AboutUsFragment"
         android:label="fragment_about_us"
         tools:layout="@layout/fragment_about_us" />
+    <fragment
+        android:id="@+id/testFragment"
+        android:name="com.gdsc.umbb.testFragment"
+        android:label="fragment_test"
+        tools:layout="@layout/fragment_test" />
 </navigation>

@@ -27,6 +27,11 @@ public class SplashScreen extends AppCompatActivity {
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
+        greenView = findViewById(R.id.splash_green_color);
+        yellowView = findViewById(R.id.splash_yellow_color);
+        redView = findViewById(R.id.splash_red_color);
+        blueView = findViewById(R.id.splash_blue_color);
+
         greenLogo = findViewById(R.id.splash_green_logo);
         yellowLogo = findViewById(R.id.splash_yellow_logo);
         redLogo = findViewById(R.id.splash_red_logo);
@@ -210,24 +215,19 @@ public class SplashScreen extends AppCompatActivity {
     private void firstAnimation() {
         Animation animation;
 
-        greenView = findViewById(R.id.splash_green_color);
-        yellowView = findViewById(R.id.splash_yellow_color);
-        redView = findViewById(R.id.splash_red_color);
-        blueView = findViewById(R.id.splash_blue_color);
-
         animation = AnimationUtils.loadAnimation(getApplicationContext(),
-                R.anim.translate_right_to_top);
+                R.anim.translate_right_top);
         greenView.startAnimation(animation);
 
         animation = AnimationUtils.loadAnimation(getApplicationContext(),
-                R.anim.translate_right_to_bottom);
+                R.anim.translate_right_bottom);
         yellowView.startAnimation(animation);
         animation = AnimationUtils.loadAnimation(getApplicationContext(),
-                R.anim.translate_left_to_top);
+                R.anim.translate_left_top);
         redView.startAnimation(animation);
 
         animation = AnimationUtils.loadAnimation(getApplicationContext(),
-                R.anim.translate_left_to_bottom);
+                R.anim.translate_left_bottom);
         blueView.startAnimation(animation);
     }
 }
