@@ -174,19 +174,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
                     android:layout_marginStart="28dp"
                     android:layout_marginTop="327dp"
-                    android:layout_marginEnd="238dp"
                     android:layout_marginBottom="362dp"
                     android:fontFamily="@font/google_sans_medium"
-                    android:text="Birthday"
+                    android:text="College year"
                     android:textColor="@color/black"
                     android:textSize="15dp" />
 
                 <EditText
-                    android:id="@+id/birthday"
+                    android:id="@+id/college"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
@@ -196,7 +194,7 @@
                     android:layout_marginEnd="21dp"
                     android:layout_marginBottom="315dp"
                     android:fontFamily="@font/google_sans_regular"
-                    android:hint="dd.mm.yyyy"
+                    android:hint="20.. / 20.."
                     android:textColor="@color/gris3" />
 
                 <TextView
@@ -206,27 +204,60 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginStart="33dp"
-                    android:layout_marginTop="395dp"
-                    android:layout_marginEnd="235dp"
-                    android:layout_marginBottom="280dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="393dp"
+                    android:layout_marginEnd="238dp"
+                    android:layout_marginBottom="282dp"
                     android:fontFamily="@font/google_sans_medium"
-                    android:text="Gender"
+                    android:text="Faculty"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
+
                 <EditText
-                    android:id="@+id/gender"
+                    android:id="@+id/fac"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentBottom="true"
                     android:layout_marginStart="28dp"
-                    android:layout_marginTop="410dp"
+                    android:layout_marginTop="416dp"
                     android:layout_marginEnd="21dp"
-                    android:layout_marginBottom="260dp"
-                    android:hint="male"
-                    android:fontFamily="@font/google_sans_regular" />
+                    android:layout_marginBottom="254dp"
+                    android:fontFamily="@font/google_sans_regular"
+                    android:hint="M'Hamed B..." />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="29dp"
+                    android:layout_marginTop="457dp"
+                    android:layout_marginEnd="195dp"
+                    android:layout_marginBottom="232dp"
+                    android:fontFamily="@font/google_sans_medium"
+                    android:text="Departement"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
+
+                <EditText
+                    android:id="@+id/dep"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="476dp"
+                    android:layout_marginEnd="160dp"
+                    android:layout_marginBottom="193dp"
+                    android:fontFamily="@font/google_sans_regular"
+                    android:hint="Info..."
+                    android:inputType="text"
+                    android:maxLength="13"
+                    android:textColor="@color/gris3" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -235,10 +266,10 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginStart="28dp"
-                    android:layout_marginTop="455dp"
-                    android:layout_marginEnd="161dp"
-                    android:layout_marginBottom="222dp"
+                    android:layout_marginStart="29dp"
+                    android:layout_marginTop="520dp"
+                    android:layout_marginEnd="160dp"
+                    android:layout_marginBottom="157dp"
                     android:fontFamily="@font/google_sans_bold"
                     android:text="Contact info"
                     android:textColor="@color/black"
@@ -251,10 +282,10 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginStart="28dp"
-                    android:layout_marginTop="495dp"
-                    android:layout_marginEnd="250dp"
-                    android:layout_marginBottom="182dp"
+                    android:layout_marginStart="29dp"
+                    android:layout_marginTop="557dp"
+                    android:layout_marginEnd="249dp"
+                    android:layout_marginBottom="120dp"
                     android:fontFamily="@font/google_sans_medium"
                     android:text="Email"
                     android:textColor="@color/black"
@@ -268,46 +299,15 @@
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
                     android:layout_marginStart="28dp"
-                    android:layout_marginTop="510dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="150dp"
+                    android:layout_marginTop="571dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginBottom="89dp"
                     android:fontFamily="@font/google_sans_regular"
                     android:hint="Ex: name@gmail.com"
                     android:textColor="@color/gris3" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginStart="28dp"
-                    android:layout_marginTop="567dp"
-                    android:layout_marginEnd="196dp"
-                    android:layout_marginBottom="122dp"
-                    android:fontFamily="@font/google_sans_medium"
-                    android:text="Phone number"
-                    android:textColor="@color/black"
-                    android:textSize="15dp" />
-
-                <EditText
-                    android:id="@+id/number"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginStart="28dp"
-                    android:layout_marginTop="586dp"
-                    android:layout_marginEnd="160dp"
-                    android:layout_marginBottom="83dp"
-                    android:fontFamily="@font/google_sans_regular"
-                    android:hint="+213"
-                    android:inputType="number"
-                    android:maxLength="13"
-                    android:textColor="@color/gris3" />
-
                 <Button
+                    android:id="@+id/cancel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
@@ -325,6 +325,7 @@
                     android:textColor="@color/gris2" />
 
                 <Button
+                    android:id="@+id/save"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"

@@ -117,11 +117,19 @@ public class myadapter extends RecyclerView.Adapter<myadapter.ViewHolder> {
             @Override
             public void onClick(View view) {
                 // Get info from SharedPreferences: and check if preferences is not null.
-                SharedPreferences prefs = context.getSharedPreferences("USER", MODE_PRIVATE);
-                if (prefs == null) {
-                    ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.drawer_fragment_container, new InformationFragment()).addToBackStack(null).commit();
-                    Toast.makeText(context, "Veuillez remplir vos informations", Toast.LENGTH_LONG).show();
-                } else {
+                SharedPreferences prefs = context.getSharedPreferences("USER_INFO", MODE_PRIVATE);
+                nom_ = prefs.getString("@{name}", "");
+                prenom_ = prefs.getString("@{pren}", "");
+                faculte_ = prefs.getString("@{fac}", "");
+                email_ = prefs.getString("@{mail}", "");
+                matricule_ = prefs.getString("@{mat}", "");
+                departement_ = prefs.getString("@{dep}", "");
+                specialite_ = prefs.getString("@{spec}", "");
+                annee_universitaire_ = prefs.getString("@{anu}", "");
+                date_ = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+                //nom_de_destinataire_ = prefs.getString("@{nom_dest}", ""); // Not work
+
+                /*
                     nom_ = "Belmokhtar";
                     prenom_ = "Idir";
                     faculte_ = "Sciences INIM UMBB";
@@ -132,18 +140,12 @@ public class myadapter extends RecyclerView.Adapter<myadapter.ViewHolder> {
                     annee_universitaire_ = "2023/2024";
                     date_ = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
                     nom_de_destinataire_ = "Chef Département";
-                    /*
-                    nom_ = prefs.getString("@{name}", "");
-                    prenom_ = prefs.getString("@{pren}", "");
-                    faculte_ = prefs.getString("@{fac}", "");
-                    email_ = prefs.getString("@{mail}", "");
-                    matricule_ = prefs.getString("@{mat}", "");
-                    departement_ = prefs.getString("@{dep}", "");
-                    specialite_ = prefs.getString("@{spec}", "");
-                    annee_universitaire_ = prefs.getString("@{anu}", "");
-                    date_ = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
-                    nom_de_destinataire_ = prefs.getString("@{nom_dest}", "");
                     */
+
+                if (nom_.equals("") || prenom_.equals("") || faculte_.equals("") || email_.equals("") || matricule_.equals("") || departement_.equals("") || specialite_.equals("") || annee_universitaire_.equals("")) {
+                    ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.drawer_fragment_container, new InformationFragment()).addToBackStack(null).commit();
+                    Toast.makeText(context, "Veuillez remplir vos informations", Toast.LENGTH_LONG).show();
+                } else {
 
                     if (s.equals("Faire un Recours")) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -180,7 +182,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.ViewHolder> {
                     } else if (s.equals("Demande de bloquer")) {
                         // Créez une boîte de dialogue personnalisée
                         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                        View dialogView = ((Activity)context).getLayoutInflater().inflate(R.layout.dialog_demande_bloquer, null);
+                        View dialogView = ((Activity) context).getLayoutInflater().inflate(R.layout.dialog_demande_bloquer, null);
                         builder.setView(dialogView);
 
                         // Create the AlertDialog object
@@ -213,7 +215,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.ViewHolder> {
                     } else if (s.equals("Demande de changement de Specialite")) {
                         // Créez une boîte de dialogue personnalisée
                         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                        View dialogView = ((Activity)context).getLayoutInflater().inflate(R.layout.dialog_demande_change_spec, null);
+                        View dialogView = ((Activity) context).getLayoutInflater().inflate(R.layout.dialog_demande_change_spec, null);
                         builder.setView(dialogView);
 
                         // Create the AlertDialog object
@@ -244,7 +246,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.ViewHolder> {
                     } else if (s.equals("Demande de changement d'université")) {
                         // Créez une boîte de dialogue personnalisée
                         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                        View dialogView = ((Activity)context).getLayoutInflater().inflate(R.layout.dialog_demande_change_univ, null);
+                        View dialogView = ((Activity) context).getLayoutInflater().inflate(R.layout.dialog_demande_change_univ, null);
                         builder.setView(dialogView);
 
                         // Create the AlertDialog object
@@ -281,7 +283,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.ViewHolder> {
                     } else if (s.equals("Demande de changement de groupe")) {
                         // Créez une boîte de dialogue personnalisée
                         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                        View dialogView = ((Activity)context).getLayoutInflater().inflate(R.layout.dialog_demande_change_groupe, null);
+                        View dialogView = ((Activity) context).getLayoutInflater().inflate(R.layout.dialog_demande_change_groupe, null);
                         builder.setView(dialogView);
 
                         // Create the AlertDialog object
@@ -314,7 +316,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.ViewHolder> {
                     } else if (s.equals("Demande Salle et materiel")) {
                         // Créez une boîte de dialogue personnalisée
                         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                        View dialogView = ((Activity)context).getLayoutInflater().inflate(R.layout.dialog_demande_salle_materiel, null);
+                        View dialogView = ((Activity) context).getLayoutInflater().inflate(R.layout.dialog_demande_salle_materiel, null);
                         builder.setView(dialogView);
 
                         // Create the AlertDialog object
@@ -369,284 +371,458 @@ public class myadapter extends RecyclerView.Adapter<myadapter.ViewHolder> {
     }
 
     private void faire_recours() {
-        if (permissionSTORAGE()) {
-            try {
-                InputStream inputStream = context.getResources().openRawResource(R.raw.recourss);
-                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
-                StringBuilder output = new StringBuilder(); // Pour stocker la sortie modifiée
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        View dialogView = ((Activity) context).getLayoutInflater().inflate(R.layout.dialog_demande_destination, null);
+        builder.setView(dialogView);
 
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    String modifiedLine = line;
+        // Create the AlertDialog object
+        AlertDialog dialog = builder.create();
 
-                    // Effectuer les substitutions personnalisées ici
-                    // Part1
-                    modifiedLine = modifiedLine.replace(nom, nom_);
-                    modifiedLine = modifiedLine.replace(prenom, prenom_);
-                    modifiedLine = modifiedLine.replace(faculte, faculte_);
-                    modifiedLine = modifiedLine.replace(email, email_);
-                    modifiedLine = modifiedLine.replace(matricule, matricule_);
-                    modifiedLine = modifiedLine.replace(departement, departement_);
-                    modifiedLine = modifiedLine.replace(specialite, specialite_);
-                    modifiedLine = modifiedLine.replace(annee_universitaire, annee_universitaire_);
-                    modifiedLine = modifiedLine.replace(date, date_);
-                    modifiedLine = modifiedLine.replace(nom_de_destinataire, nom_de_destinataire_);
+        // Set the window layout params
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-                    // Part2
-                    modifiedLine = modifiedLine.replace(copie_exmn_ou_test, copie_exmn_ou_test_);
-                    modifiedLine = modifiedLine.replace(modul, modul_);
+        // Set the window background drawable
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-                    output.append(modifiedLine).append("\n");
+        // Obtenez les références des vues dans la boîte de dialogue
+        EditText et1 = dialogView.findViewById(R.id.nom_du_destinataire_);
+
+        // Définir le bouton "Créer" pour enregistrer les valeurs et ouvrir une autre activité
+        dialogView.findViewById(R.id.btn_end_demande).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Lire les valeurs saisies
+                nom_de_destinataire_ = et1.getText().toString();
+                if (permissionSTORAGE()) {
+                    try {
+                        InputStream inputStream = context.getResources().openRawResource(R.raw.recourss);
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+                        StringBuilder output = new StringBuilder(); // Pour stocker la sortie modifiée
+
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            String modifiedLine = line;
+
+                            // Effectuer les substitutions personnalisées ici
+                            // Part1
+                            modifiedLine = modifiedLine.replace(nom, nom_);
+                            modifiedLine = modifiedLine.replace(prenom, prenom_);
+                            modifiedLine = modifiedLine.replace(faculte, faculte_);
+                            modifiedLine = modifiedLine.replace(email, email_);
+                            modifiedLine = modifiedLine.replace(matricule, matricule_);
+                            modifiedLine = modifiedLine.replace(departement, departement_);
+                            modifiedLine = modifiedLine.replace(specialite, specialite_);
+                            modifiedLine = modifiedLine.replace(annee_universitaire, annee_universitaire_);
+                            modifiedLine = modifiedLine.replace(date, date_);
+                            modifiedLine = modifiedLine.replace(nom_de_destinataire, nom_de_destinataire_);
+
+                            // Part2
+                            modifiedLine = modifiedLine.replace(copie_exmn_ou_test, copie_exmn_ou_test_);
+                            modifiedLine = modifiedLine.replace(modul, modul_);
+
+                            output.append(modifiedLine).append("\n");
+                        }
+
+                        reader.close();
+
+                        String modifiedContent = output.toString();
+
+                        // Send modifiedContent to DemandeActivity
+                        Intent intent = new Intent(context, DemandeActivity.class);
+                        intent.putExtra("workTextHtml", modifiedContent);
+                        context.startActivity(intent);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-
-                reader.close();
-
-                String modifiedContent = output.toString();
-
-                // Send modifiedContent to DemandeActivity
-                Intent intent = new Intent(context, DemandeActivity.class);
-                intent.putExtra("workTextHtml", modifiedContent);
-                context.startActivity(intent);
-
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-        }
+        });
+
+        // Show the dialog
+        dialog.show();
     }
 
     private void demande_bloquer() {
-        if (permissionSTORAGE()) {
-            try {
-                InputStream inputStream = context.getResources().openRawResource(R.raw.demande_bloquer);
-                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
-                StringBuilder output = new StringBuilder(); // Pour stocker la sortie modifiée
 
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    String modifiedLine = line;
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        View dialogView = ((Activity) context).getLayoutInflater().inflate(R.layout.dialog_demande_destination, null);
+        builder.setView(dialogView);
 
-                    // Effectuer les substitutions personnalisées ici
-                    // Part1
-                    modifiedLine = modifiedLine.replace(nom, nom_);
-                    modifiedLine = modifiedLine.replace(prenom, prenom_);
-                    modifiedLine = modifiedLine.replace(faculte, faculte_);
-                    modifiedLine = modifiedLine.replace(email, email_);
-                    modifiedLine = modifiedLine.replace(matricule, matricule_);
-                    modifiedLine = modifiedLine.replace(departement, departement_);
-                    modifiedLine = modifiedLine.replace(specialite, specialite_);
-                    modifiedLine = modifiedLine.replace(annee_universitaire, annee_universitaire_);
-                    modifiedLine = modifiedLine.replace(date, date_);
-                    modifiedLine = modifiedLine.replace(nom_de_destinataire, nom_de_destinataire_);
+        // Create the AlertDialog object
+        AlertDialog dialog = builder.create();
 
-                    // Part2
-                    modifiedLine = modifiedLine.replace(annee_universitaire_a_bloquer, annee_universitaire_a_bloquer_);
-                    modifiedLine = modifiedLine.replace(difficultes_de_, difficultes_de__);
+        // Set the window layout params
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-                    output.append(modifiedLine).append("\n");
+        // Set the window background drawable
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        // Obtenez les références des vues dans la boîte de dialogue
+        EditText et1 = dialogView.findViewById(R.id.nom_du_destinataire_);
+
+        // Définir le bouton "Créer" pour enregistrer les valeurs et ouvrir une autre activité
+        dialogView.findViewById(R.id.btn_end_demande).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Lire les valeurs saisies
+                nom_de_destinataire_ = et1.getText().toString();
+                if (permissionSTORAGE()) {
+                    try {
+                        InputStream inputStream = context.getResources().openRawResource(R.raw.demande_bloquer);
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+                        StringBuilder output = new StringBuilder(); // Pour stocker la sortie modifiée
+
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            String modifiedLine = line;
+
+                            // Effectuer les substitutions personnalisées ici
+                            // Part1
+                            modifiedLine = modifiedLine.replace(nom, nom_);
+                            modifiedLine = modifiedLine.replace(prenom, prenom_);
+                            modifiedLine = modifiedLine.replace(faculte, faculte_);
+                            modifiedLine = modifiedLine.replace(email, email_);
+                            modifiedLine = modifiedLine.replace(matricule, matricule_);
+                            modifiedLine = modifiedLine.replace(departement, departement_);
+                            modifiedLine = modifiedLine.replace(specialite, specialite_);
+                            modifiedLine = modifiedLine.replace(annee_universitaire, annee_universitaire_);
+                            modifiedLine = modifiedLine.replace(date, date_);
+                            modifiedLine = modifiedLine.replace(nom_de_destinataire, nom_de_destinataire_);
+
+                            // Part2
+                            modifiedLine = modifiedLine.replace(annee_universitaire_a_bloquer, annee_universitaire_a_bloquer_);
+                            modifiedLine = modifiedLine.replace(difficultes_de_, difficultes_de__);
+
+                            output.append(modifiedLine).append("\n");
+                        }
+
+                        reader.close();
+
+                        String modifiedContent = output.toString();
+
+                        // Send modifiedContent to DemandeActivity
+                        Intent intent = new Intent(context, DemandeActivity.class);
+                        intent.putExtra("workTextHtml", modifiedContent);
+                        context.startActivity(intent);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-
-                reader.close();
-
-                String modifiedContent = output.toString();
-
-                // Send modifiedContent to DemandeActivity
-                Intent intent = new Intent(context, DemandeActivity.class);
-                intent.putExtra("workTextHtml", modifiedContent);
-                context.startActivity(intent);
-
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-        }
+        });
+
+        // Show the dialog
+        dialog.show();
     }
 
     private void demande_change_spec() {
-        if (permissionSTORAGE()) {
-            try {
-                InputStream inputStream = context.getResources().openRawResource(R.raw.demande_changement_de_specialite);
-                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
-                StringBuilder output = new StringBuilder(); // Pour stocker la sortie modifiée
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        View dialogView = ((Activity) context).getLayoutInflater().inflate(R.layout.dialog_demande_destination, null);
+        builder.setView(dialogView);
 
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    String modifiedLine = line;
+        // Create the AlertDialog object
+        AlertDialog dialog = builder.create();
 
-                    // Effectuer les substitutions personnalisées ici
-                    // Part1
-                    modifiedLine = modifiedLine.replace(nom, nom_);
-                    modifiedLine = modifiedLine.replace(prenom, prenom_);
-                    modifiedLine = modifiedLine.replace(faculte, faculte_);
-                    modifiedLine = modifiedLine.replace(email, email_);
-                    modifiedLine = modifiedLine.replace(matricule, matricule_);
-                    modifiedLine = modifiedLine.replace(departement, departement_);
-                    modifiedLine = modifiedLine.replace(specialite, specialite_);
-                    modifiedLine = modifiedLine.replace(annee_universitaire, annee_universitaire_);
-                    modifiedLine = modifiedLine.replace(date, date_);
-                    modifiedLine = modifiedLine.replace(nom_de_destinataire, nom_de_destinataire_);
+        // Set the window layout params
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-                    // Part2
-                    modifiedLine = modifiedLine.replace(specialite_destinataire, specialite_destinataire_);
+        // Set the window background drawable
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-                    output.append(modifiedLine).append("\n");
+        // Obtenez les références des vues dans la boîte de dialogue
+        EditText et1 = dialogView.findViewById(R.id.nom_du_destinataire_);
+
+        // Définir le bouton "Créer" pour enregistrer les valeurs et ouvrir une autre activité
+        dialogView.findViewById(R.id.btn_end_demande).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Lire les valeurs saisies
+                nom_de_destinataire_ = et1.getText().toString();
+                if (permissionSTORAGE()) {
+                    try {
+                        InputStream inputStream = context.getResources().openRawResource(R.raw.demande_changement_de_specialite);
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+                        StringBuilder output = new StringBuilder(); // Pour stocker la sortie modifiée
+
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            String modifiedLine = line;
+
+                            // Effectuer les substitutions personnalisées ici
+                            // Part1
+                            modifiedLine = modifiedLine.replace(nom, nom_);
+                            modifiedLine = modifiedLine.replace(prenom, prenom_);
+                            modifiedLine = modifiedLine.replace(faculte, faculte_);
+                            modifiedLine = modifiedLine.replace(email, email_);
+                            modifiedLine = modifiedLine.replace(matricule, matricule_);
+                            modifiedLine = modifiedLine.replace(departement, departement_);
+                            modifiedLine = modifiedLine.replace(specialite, specialite_);
+                            modifiedLine = modifiedLine.replace(annee_universitaire, annee_universitaire_);
+                            modifiedLine = modifiedLine.replace(date, date_);
+                            modifiedLine = modifiedLine.replace(nom_de_destinataire, nom_de_destinataire_);
+
+                            // Part2
+                            modifiedLine = modifiedLine.replace(specialite_destinataire, specialite_destinataire_);
+
+                            output.append(modifiedLine).append("\n");
+                        }
+
+                        reader.close();
+
+                        String modifiedContent = output.toString();
+
+                        // Send modifiedContent to DemandeActivity
+                        Intent intent = new Intent(context, DemandeActivity.class);
+                        intent.putExtra("workTextHtml", modifiedContent);
+                        context.startActivity(intent);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-
-                reader.close();
-
-                String modifiedContent = output.toString();
-
-                // Send modifiedContent to DemandeActivity
-                Intent intent = new Intent(context, DemandeActivity.class);
-                intent.putExtra("workTextHtml", modifiedContent);
-                context.startActivity(intent);
-
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-        }
+        });
+
+        // Show the dialog
+        dialog.show();
     }
 
     private void demande_change_univ() {
-        if (permissionSTORAGE()) {
-            try {
-                InputStream inputStream = context.getResources().openRawResource(R.raw.demande_changement_duniversite);
-                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
-                StringBuilder output = new StringBuilder(); // Pour stocker la sortie modifiée
 
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    String modifiedLine = line;
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        View dialogView = ((Activity) context).getLayoutInflater().inflate(R.layout.dialog_demande_destination, null);
+        builder.setView(dialogView);
 
-                    // Effectuer les substitutions personnalisées ici
-                    // Part1
-                    modifiedLine = modifiedLine.replace(nom, nom_);
-                    modifiedLine = modifiedLine.replace(prenom, prenom_);
-                    modifiedLine = modifiedLine.replace(faculte, faculte_);
-                    modifiedLine = modifiedLine.replace(email, email_);
-                    modifiedLine = modifiedLine.replace(matricule, matricule_);
-                    modifiedLine = modifiedLine.replace(departement, departement_);
-                    modifiedLine = modifiedLine.replace(specialite, specialite_);
-                    modifiedLine = modifiedLine.replace(annee_universitaire, annee_universitaire_);
-                    modifiedLine = modifiedLine.replace(date, date_);
-                    modifiedLine = modifiedLine.replace(nom_de_destinataire, nom_de_destinataire_);
+        // Create the AlertDialog object
+        AlertDialog dialog = builder.create();
 
-                    // Part2
-                    modifiedLine = modifiedLine.replace(raison, raison_);
-                    modifiedLine = modifiedLine.replace(annee_concernee, annee_concernee_);
-                    modifiedLine = modifiedLine.replace(explication, explication_);
-                    modifiedLine = modifiedLine.replace(dep_dest, dep_dest_);
+        // Set the window layout params
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-                    output.append(modifiedLine).append("\n");
+        // Set the window background drawable
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        // Obtenez les références des vues dans la boîte de dialogue
+        EditText et1 = dialogView.findViewById(R.id.nom_du_destinataire_);
+
+        // Définir le bouton "Créer" pour enregistrer les valeurs et ouvrir une autre activité
+        dialogView.findViewById(R.id.btn_end_demande).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Lire les valeurs saisies
+                nom_de_destinataire_ = et1.getText().toString();
+                if (permissionSTORAGE()) {
+                    try {
+                        InputStream inputStream = context.getResources().openRawResource(R.raw.demande_changement_duniversite);
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+                        StringBuilder output = new StringBuilder(); // Pour stocker la sortie modifiée
+
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            String modifiedLine = line;
+
+                            // Effectuer les substitutions personnalisées ici
+                            // Part1
+                            modifiedLine = modifiedLine.replace(nom, nom_);
+                            modifiedLine = modifiedLine.replace(prenom, prenom_);
+                            modifiedLine = modifiedLine.replace(faculte, faculte_);
+                            modifiedLine = modifiedLine.replace(email, email_);
+                            modifiedLine = modifiedLine.replace(matricule, matricule_);
+                            modifiedLine = modifiedLine.replace(departement, departement_);
+                            modifiedLine = modifiedLine.replace(specialite, specialite_);
+                            modifiedLine = modifiedLine.replace(annee_universitaire, annee_universitaire_);
+                            modifiedLine = modifiedLine.replace(date, date_);
+                            modifiedLine = modifiedLine.replace(nom_de_destinataire, nom_de_destinataire_);
+
+                            // Part2
+                            modifiedLine = modifiedLine.replace(raison, raison_);
+                            modifiedLine = modifiedLine.replace(annee_concernee, annee_concernee_);
+                            modifiedLine = modifiedLine.replace(explication, explication_);
+                            modifiedLine = modifiedLine.replace(dep_dest, dep_dest_);
+
+                            output.append(modifiedLine).append("\n");
+                        }
+
+                        reader.close();
+
+                        String modifiedContent = output.toString();
+
+                        // Send modifiedContent to DemandeActivity
+                        Intent intent = new Intent(context, DemandeActivity.class);
+                        intent.putExtra("workTextHtml", modifiedContent);
+                        context.startActivity(intent);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-
-                reader.close();
-
-                String modifiedContent = output.toString();
-
-                // Send modifiedContent to DemandeActivity
-                Intent intent = new Intent(context, DemandeActivity.class);
-                intent.putExtra("workTextHtml", modifiedContent);
-                context.startActivity(intent);
-
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-        }
+        });
+
+        // Show the dialog
+        dialog.show();
+
     }
 
     private void demande_change_groupe() {
-        if (permissionSTORAGE()) {
-            try {
-                InputStream inputStream = context.getResources().openRawResource(R.raw.demande_changement_groupe);
-                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
-                StringBuilder output = new StringBuilder(); // Pour stocker la sortie modifiée
 
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    String modifiedLine = line;
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        View dialogView = ((Activity) context).getLayoutInflater().inflate(R.layout.dialog_demande_destination, null);
+        builder.setView(dialogView);
 
-                    // Effectuer les substitutions personnalisées ici
-                    // Part1
-                    modifiedLine = modifiedLine.replace(nom, nom_);
-                    modifiedLine = modifiedLine.replace(prenom, prenom_);
-                    modifiedLine = modifiedLine.replace(faculte, faculte_);
-                    modifiedLine = modifiedLine.replace(email, email_);
-                    modifiedLine = modifiedLine.replace(matricule, matricule_);
-                    modifiedLine = modifiedLine.replace(departement, departement_);
-                    modifiedLine = modifiedLine.replace(specialite, specialite_);
-                    modifiedLine = modifiedLine.replace(annee_universitaire, annee_universitaire_);
-                    modifiedLine = modifiedLine.replace(date, date_);
-                    modifiedLine = modifiedLine.replace(nom_de_destinataire, nom_de_destinataire_);
+        // Create the AlertDialog object
+        AlertDialog dialog = builder.create();
 
-                    // Part2
-                    modifiedLine = modifiedLine.replace(groupe_destination, groupe_destination_);
-                    modifiedLine = modifiedLine.replace(groupe_Actuel, groupe_Actuel_);
+        // Set the window layout params
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-                    output.append(modifiedLine).append("\n");
+        // Set the window background drawable
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        // Obtenez les références des vues dans la boîte de dialogue
+        EditText et1 = dialogView.findViewById(R.id.nom_du_destinataire_);
+
+        // Définir le bouton "Créer" pour enregistrer les valeurs et ouvrir une autre activité
+        dialogView.findViewById(R.id.btn_end_demande).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Lire les valeurs saisies
+                nom_de_destinataire_ = et1.getText().toString();
+                if (permissionSTORAGE()) {
+                    try {
+                        InputStream inputStream = context.getResources().openRawResource(R.raw.demande_changement_groupe);
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+                        StringBuilder output = new StringBuilder(); // Pour stocker la sortie modifiée
+
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            String modifiedLine = line;
+
+                            // Effectuer les substitutions personnalisées ici
+                            // Part1
+                            modifiedLine = modifiedLine.replace(nom, nom_);
+                            modifiedLine = modifiedLine.replace(prenom, prenom_);
+                            modifiedLine = modifiedLine.replace(faculte, faculte_);
+                            modifiedLine = modifiedLine.replace(email, email_);
+                            modifiedLine = modifiedLine.replace(matricule, matricule_);
+                            modifiedLine = modifiedLine.replace(departement, departement_);
+                            modifiedLine = modifiedLine.replace(specialite, specialite_);
+                            modifiedLine = modifiedLine.replace(annee_universitaire, annee_universitaire_);
+                            modifiedLine = modifiedLine.replace(date, date_);
+                            modifiedLine = modifiedLine.replace(nom_de_destinataire, nom_de_destinataire_);
+
+                            // Part2
+                            modifiedLine = modifiedLine.replace(groupe_destination, groupe_destination_);
+                            modifiedLine = modifiedLine.replace(groupe_Actuel, groupe_Actuel_);
+
+                            output.append(modifiedLine).append("\n");
+                        }
+
+                        reader.close();
+
+                        String modifiedContent = output.toString();
+
+                        // Send modifiedContent to DemandeActivity
+                        Intent intent = new Intent(context, DemandeActivity.class);
+                        intent.putExtra("workTextHtml", modifiedContent);
+                        context.startActivity(intent);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-
-                reader.close();
-
-                String modifiedContent = output.toString();
-
-                // Send modifiedContent to DemandeActivity
-                Intent intent = new Intent(context, DemandeActivity.class);
-                intent.putExtra("workTextHtml", modifiedContent);
-                context.startActivity(intent);
-
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-        }
+        });
+
+        // Show the dialog
+        dialog.show();
+
     }
 
     private void demande_salle_materiel() {
-        if (permissionSTORAGE()) {
-            try {
-                InputStream inputStream = context.getResources().openRawResource(R.raw.demande_salle_et_materiel);
-                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
-                StringBuilder output = new StringBuilder(); // Pour stocker la sortie modifiée
 
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    String modifiedLine = line;
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        View dialogView = ((Activity) context).getLayoutInflater().inflate(R.layout.dialog_demande_destination, null);
+        builder.setView(dialogView);
 
-                    // Effectuer les substitutions personnalisées ici
-                    modifiedLine = modifiedLine.replace(SM_faculte, faculte_); // meme
-                    modifiedLine = modifiedLine.replace(SM_annee_universitaire, annee_universitaire_); // meme
-                    modifiedLine = modifiedLine.replace(SM_nom_de_club, SM_nom_de_club_);
-                    modifiedLine = modifiedLine.replace(SM_email_de_club, SM_email_de_club_);
-                    modifiedLine = modifiedLine.replace(SM_date_de_la_demande, date_); // meme
-                    modifiedLine = modifiedLine.replace(SM_nom_de_destinataire, SM_nom_de_destinataire_);
-                    modifiedLine = modifiedLine.replace(SM_nom_de_la_salle, SM_nom_de_la_salle_);
-                    modifiedLine = modifiedLine.replace(SM_lieu_de_la_salle, SM_lieu_de_la_salle_);
-                    modifiedLine = modifiedLine.replace(SM_date_event, SM_date_event_);
-                    modifiedLine = modifiedLine.replace(SM_debut, SM_debut_);
-                    modifiedLine = modifiedLine.replace(SM_fin, SM_fin_);
-                    modifiedLine = modifiedLine.replace(SM_nature_event, SM_nature_event_);
-                    modifiedLine = modifiedLine.replace(SM_details, SM_details_);
+        // Create the AlertDialog object
+        AlertDialog dialog = builder.create();
 
-                    output.append(modifiedLine).append("\n");
+        // Set the window layout params
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        // Set the window background drawable
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        // Obtenez les références des vues dans la boîte de dialogue
+        EditText et1 = dialogView.findViewById(R.id.nom_du_destinataire_);
+
+        // Définir le bouton "Créer" pour enregistrer les valeurs et ouvrir une autre activité
+        dialogView.findViewById(R.id.btn_end_demande).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Lire les valeurs saisies
+                nom_de_destinataire_ = et1.getText().toString();
+                if (permissionSTORAGE()) {
+                    try {
+                        InputStream inputStream = context.getResources().openRawResource(R.raw.demande_salle_et_materiel);
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+                        StringBuilder output = new StringBuilder(); // Pour stocker la sortie modifiée
+
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            String modifiedLine = line;
+
+                            // Effectuer les substitutions personnalisées ici
+                            modifiedLine = modifiedLine.replace(SM_faculte, faculte_); // meme
+                            modifiedLine = modifiedLine.replace(SM_annee_universitaire, annee_universitaire_); // meme
+                            modifiedLine = modifiedLine.replace(SM_nom_de_club, SM_nom_de_club_);
+                            modifiedLine = modifiedLine.replace(SM_email_de_club, SM_email_de_club_);
+                            modifiedLine = modifiedLine.replace(SM_date_de_la_demande, date_); // meme
+                            modifiedLine = modifiedLine.replace(SM_nom_de_destinataire, SM_nom_de_destinataire_);
+                            modifiedLine = modifiedLine.replace(SM_nom_de_la_salle, SM_nom_de_la_salle_);
+                            modifiedLine = modifiedLine.replace(SM_lieu_de_la_salle, SM_lieu_de_la_salle_);
+                            modifiedLine = modifiedLine.replace(SM_date_event, SM_date_event_);
+                            modifiedLine = modifiedLine.replace(SM_debut, SM_debut_);
+                            modifiedLine = modifiedLine.replace(SM_fin, SM_fin_);
+                            modifiedLine = modifiedLine.replace(SM_nature_event, SM_nature_event_);
+                            modifiedLine = modifiedLine.replace(SM_details, SM_details_);
+
+                            output.append(modifiedLine).append("\n");
+                        }
+
+                        reader.close();
+
+                        String modifiedContent = output.toString();
+
+                        // Send modifiedContent to DemandeActivity
+                        Intent intent = new Intent(context, DemandeActivity.class);
+                        intent.putExtra("workTextHtml", modifiedContent);
+                        context.startActivity(intent);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-
-                reader.close();
-
-                String modifiedContent = output.toString();
-
-                // Send modifiedContent to DemandeActivity
-                Intent intent = new Intent(context, DemandeActivity.class);
-                intent.putExtra("workTextHtml", modifiedContent);
-                context.startActivity(intent);
-
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-        }
+        });
+
+        // Show the dialog
+        dialog.show();
     }
 
     private boolean permissionSTORAGE() {

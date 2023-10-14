@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@drawable/white_back">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nom du destinataire"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:paddingBottom="8dp" />
+
+        <EditText
+            android:id="@+id/nom_du_destinataire_"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Chef Département..."
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:background="@drawable/custom_button_stork"
+            android:padding="12dp"
+            android:inputType="phone|date"
+            android:minLines="1"
+            android:gravity="top" />
+
+        <Button
+            android:id="@+id/btn_end_demande"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Terminer"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:background="@drawable/custom_button"
+            android:paddingStart="24dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="24dp"
+            android:paddingBottom="12dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp" />
+
+    </LinearLayout>
