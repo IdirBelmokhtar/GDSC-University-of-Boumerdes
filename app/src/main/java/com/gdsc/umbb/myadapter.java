@@ -172,6 +172,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.ViewHolder> {
                                 // Lire les valeurs saisies
                                 copie_exmn_ou_test_ = et1.getText().toString();
                                 modul_ = et2.getText().toString();
+                                dialog.dismiss();
                                 faire_recours();
                             }
                         });
@@ -205,6 +206,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.ViewHolder> {
                                 // Lire les valeurs saisies
                                 annee_universitaire_a_bloquer_ = et1.getText().toString();
                                 difficultes_de__ = et2.getText().toString();
+                                dialog.dismiss();
                                 demande_bloquer();
                             }
                         });
@@ -236,6 +238,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.ViewHolder> {
                             public void onClick(View view) {
                                 // Lire les valeurs saisies
                                 specialite_destinataire_ = et1.getText().toString();
+                                dialog.dismiss();
                                 demande_change_spec();
                             }
                         });
@@ -273,6 +276,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.ViewHolder> {
                                 annee_concernee_ = et2.getText().toString();
                                 explication_ = et3.getText().toString();
                                 dep_dest_ = et4.getText().toString();
+                                dialog.dismiss();
                                 demande_change_univ();
                             }
                         });
@@ -306,6 +310,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.ViewHolder> {
                                 // Lire les valeurs saisies
                                 groupe_destination_ = et1.getText().toString();
                                 groupe_Actuel_ = et2.getText().toString();
+                                dialog.dismiss();
                                 demande_change_groupe();
                             }
                         });
@@ -356,6 +361,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.ViewHolder> {
                                 SM_fin_ = et8.getText().toString();
                                 SM_nature_event_ = et9.getText().toString();
                                 SM_details_ = et10.getText().toString();
+                                dialog.dismiss();
                                 demande_salle_materiel();
                             }
                         });
@@ -433,7 +439,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.ViewHolder> {
                         Intent intent = new Intent(context, DemandeActivity.class);
                         intent.putExtra("workTextHtml", modifiedContent);
                         context.startActivity(intent);
-
+                        dialog.dismiss();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -509,7 +515,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.ViewHolder> {
                         Intent intent = new Intent(context, DemandeActivity.class);
                         intent.putExtra("workTextHtml", modifiedContent);
                         context.startActivity(intent);
-
+                        dialog.dismiss();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -583,7 +589,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.ViewHolder> {
                         Intent intent = new Intent(context, DemandeActivity.class);
                         intent.putExtra("workTextHtml", modifiedContent);
                         context.startActivity(intent);
-
+                        dialog.dismiss();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -661,7 +667,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.ViewHolder> {
                         Intent intent = new Intent(context, DemandeActivity.class);
                         intent.putExtra("workTextHtml", modifiedContent);
                         context.startActivity(intent);
-
+                        dialog.dismiss();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -738,7 +744,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.ViewHolder> {
                         Intent intent = new Intent(context, DemandeActivity.class);
                         intent.putExtra("workTextHtml", modifiedContent);
                         context.startActivity(intent);
-
+                        dialog.dismiss();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -813,7 +819,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.ViewHolder> {
                         Intent intent = new Intent(context, DemandeActivity.class);
                         intent.putExtra("workTextHtml", modifiedContent);
                         context.startActivity(intent);
-
+                        dialog.dismiss();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

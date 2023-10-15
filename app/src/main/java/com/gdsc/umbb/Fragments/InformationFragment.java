@@ -26,7 +26,7 @@ public class InformationFragment extends Fragment {
 
     Spinner sp;
     ArrayAdapter<String> arrayAdapter;
-    String[] filier = {"ISIL", "SI", "ST", "Computer Science"};
+    String[] filier = {"ISIL", "SI", "ST", "Computer Science","Sir","Ilti","Ti"};
     EditText mat, firstname, lastname, college, fac, dep, email;
     Button save, cancel;
 

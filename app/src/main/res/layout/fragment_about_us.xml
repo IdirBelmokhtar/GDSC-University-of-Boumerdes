@@ -37,12 +37,13 @@
         android:text="@string/part_three"/>
 
     <TextView
+        android:id="@+id/linkTree"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Follow_us"
         android:layout_gravity="center"
-        android:textColor="@color/black"
         android:textStyle="bold"
+        android:textColor="@color/blue"
         android:textSize="20sp"
         />
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -56,20 +57,24 @@
         >
 
         <ImageView
+            android:id="@+id/insta"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/icon_instagram" />
         <ImageView
+            android:id="@+id/fb"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="30sp"
             android:src="@drawable/icon_facebook" />
         <ImageView
+            android:id="@+id/discord"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="30sp"
             android:src="@drawable/icon_discord" />
         <ImageView
+            android:id="@+id/linkedin"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="30sp"
